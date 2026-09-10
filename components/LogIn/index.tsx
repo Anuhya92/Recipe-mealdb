@@ -60,13 +60,7 @@ export default function Login() {
         <button className="button primary full" type="submit">
           Log in →
         </button>
-        <div className="demo ">
-          <strong className="text-2xl">Demo accounts</strong>
-          <span className="text-xl">anu / anu123</span>
-          <span className="text-xl">john / john123</span>
-          <span className="text-xl">jane / jane123</span>
-          <span className="text-xl">alice / alice123</span>
-        </div>
+        
       </form >
     </section >
   );

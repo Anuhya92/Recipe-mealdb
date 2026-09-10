@@ -42,7 +42,9 @@ export default function Home() {
       <section className="page-shell">
         <Login />
         <div className="section-heading">
-          <div><p className="eyebrow">TODAY&apos;S PICK</p><h2>A recipe to get you started</h2></div>
+          <div><p className="eyebrow">TODAY&apos;S PICK</p>
+          <h2>A recipe to get you started</h2>
+          </div>
         </div>
         {loading ? (
           <div className="skeleton-card">Finding something delicious…</div>
@@ -82,13 +84,18 @@ export default function Home() {
       </div>
 
       <div className="section-heading">
-        <div><p className="eyebrow">PERSONALISED FOR YOU</p><h2>Tonight&apos;s inspiration</h2></div>
+        <div>
+          <p className="eyebrow">PERSONALISED FOR YOU</p>
+          <h2>Tonight&apos;s inspiration</h2>
+          </div>
         <Link href="/Categories">See all →</Link>
       </div>
       {loading ? <div className="skeleton-card">Finding something delicious…</div> : meal ? (
         <Link href={`/meal/${meal.idMeal}`} className="feature-card">
           <img src={meal.strMealThumb} alt={meal.strMeal} />
-          <div><span className="pill">FROM {favouriteCategory || user.category}</span><h3>{meal.strMeal}</h3><p>Open recipe →</p></div>
+          <div>
+            <span className="pill">FROM {favouriteCategory || user.category}</span><h3>{meal.strMeal}</h3><p>Open recipe →</p>
+            </div>
         </Link>
       ) : <p>We couldn&apos;t load a recipe right now. Try again in a moment.</p>}
     </section>
