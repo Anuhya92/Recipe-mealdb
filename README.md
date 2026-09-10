@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Plate & Palate — Recipe Finder
 
-## Getting Started
+A multi-page Next.js (App Router) recipe app built around [TheMealDB](https://www.themealdb.com/api.php), using React Context for auth state, favourites and saved recipes, and dynamic routing for categories and meals.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to log in
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+There's no sign-up — you log in with one of the demo accounts below (username + password, matched against a static list in `data/Users.ts`). Each user has a different default favourite category, so you'll see different personalised content per user.
 
-## Learn More
+| Username | Password  | Default category |
+|----------|-----------|-------------------|
+| `anu`    | `anu123`  | Seafood           |
+| `john`   | `john123` | Beef              |
+| `jane`   | `jane123` | Vegetarian        |
+| `alice`  | `alice123`| Dessert           |
 
-To learn more about Next.js, take a look at the following resources:
+Log in, click **Log out** in the nav to end the session, then log in again as a different user in the same tab — the context resets cleanly each time.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Pages
 
-## Deploy on Vercel
+- **`/` (Home)**
+  - Logged out: shows the login form plus a random recipe fetched from TheMealDB.
+  - Logged in: shows a personalised hero, a recipe fetched from the user's favourite category, and links to Categories / Profile.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **`/Categories`** — fetches the list of categories from TheMealDB (`categories.php`). Each category card links to that category's meals and has a "favourite" toggle that's saved in context and reflected on the Home page.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **`/category/[category]`** — dynamic route; fetches meals for the selected category (`filter.php?c=...`) and links to each meal's detail page.
+
+- **`/meal/[id]`** — dynamic route; fetches full recipe detail (`lookup.php?i=...`) — ingredients, measures, instructions, YouTube link — and lets you save/unsave the recipe.
+
+- **`/Profile`** — lists the logged-in user's saved recipes (from context) with a summary card for each, linking back to the recipe page.
+
+All pages other than Home redirect logged-out visitors to a "please log in" prompt, and login state persists across route changes via a context provider in `app/layout.tsx`.
+
+
+## Tech / requirements coverage
+
+- **TypeScript** — strict mode, no `any`, typed API responses (`Meal`, `Category`, `UserType`).
+- **Responsive styling** — plain CSS in `app/globals.css` with breakpoints down to 350px.
+- **Context** — `AppContext` holds `user`, `favouriteCategory`, `savedMeals`; exposes `login`, `logout`, `setFavouriteCategory`, `toggleSaved`, `isSaved`. Values are read and updated from multiple pages (Home, Categories, meal detail, Profile, Navigation).
+- **Dynamic routing** — `/category/[category]` and `/meal/[id]` render the same template for different data.
+- **Persistent session across routes** — the provider sits in the root layout, so login survives navigation (but not a hard refresh, by design).
+- **Log out / re-login in the same session** — via the Navigation component's logout button.
