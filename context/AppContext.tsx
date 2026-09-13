@@ -36,9 +36,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         : [m, ...prev],
     );
   }
-  function isSaved(id: string) {
-    return savedMeals.some((x) => x.idMeal === id);
-  }
+
   const value = useMemo(
     () => ({
       user,
@@ -48,7 +46,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       logout,
       setFavouriteCategory,
       toggleSaved,
-      isSaved,
+      isSaved: (id: string) => savedMeals.some((x) => x.idMeal === id),
     }),
     [user, favouriteCategory, savedMeals],
   );

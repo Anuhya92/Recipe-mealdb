@@ -1,4 +1,4 @@
-# Plate & Palate — Recipe Finder
+# Swedish Tastes — Recipe Finder
 
 A multi-page Next.js (App Router) recipe app built around [TheMealDB](https://www.themealdb.com/api.php), using React Context for auth state, favourites and saved recipes, and dynamic routing for categories and meals.
 

@@ -66,7 +66,7 @@ export default function Home() {
 
   return (
     <section className="page-shell">
-      <div className="hero">
+      <div className="hero authenticated-hero">
         <div>
           <p className="eyebrow">WELCOME BACK, {user.username.toUpperCase()}</p>
           <h1>Your next favourite<br /><span>meal starts here.</span></h1>

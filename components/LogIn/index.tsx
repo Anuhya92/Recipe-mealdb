@@ -1,5 +1,5 @@
 "use client";
-import { type FormEvent, useState } from "react";
+import { SubmitEvent, useState } from "react";
 import { users } from "@/data/Users";
 import { useApp } from "@/context/AppContext";
 export default function Login() {
@@ -7,7 +7,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  function submit(e: FormEvent) {
+  function submit(e: SubmitEvent) {
     e.preventDefault();
     const ok = users.find(
       (u) => u.username === username.trim() && u.password === password,
@@ -17,7 +17,7 @@ export default function Login() {
       setError("");
     } else
       setError(
-        "Username or password doesn't match. Try one of the demo accounts below.",
+        "Username or password doesn't match. Please try again.",
       );
   }
   return (
@@ -60,7 +60,6 @@ export default function Login() {
         <button className="button primary full" type="submit">
           Log in →
         </button>
-        
       </form >
     </section >
   );

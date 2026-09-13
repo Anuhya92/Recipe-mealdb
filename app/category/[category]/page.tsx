@@ -16,6 +16,7 @@ export default function CategoryPage() {
 
   // Fetch meals for the selected category
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true);
 
     fetch(

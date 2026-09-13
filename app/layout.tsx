@@ -5,8 +5,8 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 
 export const metadata: Metadata = {
-  title: "Plate & Palate | Recipe Finder",
-  description: "Discover, save and organise recipes with TheMealDB.",
+  title: "Swedish Tastes",
+  description: "Discover, save and organise recipes with Swedish Tastes.",
 };
 
 export default function RootLayout({

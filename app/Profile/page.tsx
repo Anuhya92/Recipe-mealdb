@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useApp } from "@/context/AppContext";
 
 export default function ProfilePage() {
-  const { user, savedMeals, favouriteCategory, logout } = useApp();
+  const { user, savedMeals, favouriteCategory } = useApp();
   if (!user)
     return (
       <section className="page-shell">

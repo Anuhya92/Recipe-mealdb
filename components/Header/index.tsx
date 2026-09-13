@@ -6,18 +6,14 @@ export default function Header() {
   return (
     <header className="site-header">
       <Link href="/" className="brand">
-         plate & palate
+         Swedish Tastes
       </Link>
-      <div className="header-status">
-        {user ? (
-          <>
-            <span className="status-dot" />
-            {user.username}
-          </>
-        ) : (
-          "Recipe discovery"
-        )}
-      </div>
+      {user && (
+        <div className="header-user">
+          <span className="status-dot" />
+          <span>Hi, {user.username}</span>
+        </div>
+      )}
     </header>
   );
 }
